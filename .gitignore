@@ -42,3 +42,6 @@ htmlcov
 
 # virtual environment
 venv
+
+# docs
+docs/_build*
