@@ -1,5 +1,15 @@
 # -*- encoding: utf-8 -*-
-# https://github.com/justintv/Twitch-API/blob/master/v3_resources/follows.md
+"""
+    twitch.api.v3.follows
+    ~~~~~~~~~~~~~~~~~~~~~
+
+    This module implements the functionality described here
+    https://github.com/justintv/Twitch-API/blob/master/v3_resources/follows.md
+
+    .. autofunction:: by_channel(name, limit=25, offset=0, direction=Direction.DESC)
+    .. autofunction:: by_user(name, limit=25, offset=0, direction=Direction.DESC, sort_by=SortBy.CREATED_AT)
+    .. autofunction:: status(user, target)
+"""
 
 from twitch import keys
 from twitch.api.parameters import Direction, SortBy
@@ -9,6 +19,14 @@ from twitch.queries import query
 
 @query
 def by_channel(name, limit=25, offset=0, direction=Direction.DESC):
+    """Get channel's list of following users
+
+    :param name: Name of the channel
+    :param limit: Maximum number of objects in array. Default is 25. Maximum is 100.
+    :param offset: Object offset for pagination. Default is 0.
+    :param direction: Creation date sorting direction. Default is desc. Valid values are asc and desc.
+    :returns: JSON List of Follow objects
+    """
     q = Qry('channels/{channel}/follows')
     q.add_urlkw(keys.CHANNEL, name)
     q.add_param(keys.LIMIT, limit, 25)

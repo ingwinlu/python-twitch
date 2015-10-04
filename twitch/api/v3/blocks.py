@@ -1,5 +1,11 @@
 # -*- encoding: utf-8 -*-
-# https://github.com/justintv/Twitch-API/blob/master/v3_resources/blocks.md
+"""
+    twitch.api.v3.blocks
+    ~~~~~~~~~~~~~~~~~~~~
+
+    This module implements the functionality described here
+    https://github.com/justintv/Twitch-API/blob/master/v3_resources/blocks.md
+"""
 
 from twitch.queries import query
 

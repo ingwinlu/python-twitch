@@ -1,4 +1,5 @@
 # -*- encoding: utf-8 -*-
+from functools import wraps
 
 from six.moves.urllib.parse import urljoin
 
@@ -116,6 +117,7 @@ def assert_new(d, k):
 
 # TODO maybe rename
 def query(f):
+    @wraps(f)
     def wrapper(*args, **kwargs):
         qry = f(*args, **kwargs)
         if not isinstance(qry, _Query):

@@ -1,5 +1,14 @@
 # -*- encoding: utf-8 -*-
-# https://github.com/justintv/Twitch-API/blob/master/v3_resources/channels.md
+"""
+    twitch.api.v3.channels
+    ~~~~~~~~~~~~~~~~~~~~~~
+
+    This module implements the functionality described here 
+    https://github.com/justintv/Twitch-API/blob/master/v3_resources/channels.md
+
+    .. autofunction:: by_name(name)
+    .. autofunction:: teams(name)
+"""
 
 from twitch import keys
 from twitch.queries import V3Query as Qry
@@ -10,6 +19,11 @@ from .videos import by_channel
 
 @query
 def by_name(name):
+    """Get channel object by name.
+
+    :param name: Name of the channel
+    :returns: Channel Object as JSON
+    """
     q = Qry('channels/{channel}')
     q.add_urlkw(keys.CHANNEL, name)
     return q
@@ -21,9 +35,11 @@ def channel():
 
 
 def get_videos(name, **kwargs):
+    """Synonym for videos.by_channel"""
     return by_channel(name, **kwargs)
 
 
+# TODO needs authentification
 @query
 def editors(name):
     raise NotImplementedError
@@ -49,6 +65,11 @@ def commercial(name, length=30):
 
 @query
 def teams(name):
+    """Returns team objects associated with the channel
+
+    :param name: Name of the channel
+    :returns: Channel Object as JSON
+    """
     q = Qry('channels/{channel}/teams')
     q.add_urlkw('channel', name)
     return q

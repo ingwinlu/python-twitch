@@ -1,5 +1,6 @@
 # -*- encoding: utf-8 -*-
 import re
+from functools import wraps
 
 from twitch.logging import log
 
@@ -12,6 +13,7 @@ _m3u_pattern = re.compile(
 
 
 def m3u8(f):
+    @wraps(f)
     def m3u8_wrapper(*args, **kwargs):
         return m3u8_to_dict(f(*args, **kwargs))
     return m3u8_wrapper
