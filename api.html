@@ -1,0 +1,367 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>API &mdash; python-twitch 1.2.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="python-twitch 1.2.0 documentation" href="index.html"/>
+        <link rel="prev" title="Contribute" href="contribute.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> python-twitch
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribute.html">Contribute</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="">API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#twitch-api-v3">twitch.api.v3</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#twitch-api-v3-blocks">twitch.api.v3.blocks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#twitch-api-v3-channels">twitch.api.v3.channels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#twitch-api-v3-chat">twitch.api.v3.chat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#twitch-api-v3-follows">twitch.api.v3.follows</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-twitch.scraper">scraper</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">python-twitch</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>API</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/api.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="api">
+<h1>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h1>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This documentation is currently a work in progress and is still rough
+around the edges. Not finding what you are looking for? Please open an
+issue describing your troubles on <a class="reference external" href="https://github.com/ingwinlu/python-twitch">python-twitch&#8217;s github page</a>!</p>
+</div>
+<span class="target" id="module-twitch.api.v3"></span><div class="section" id="twitch-api-v3">
+<h2>twitch.api.v3<a class="headerlink" href="#twitch-api-v3" title="Permalink to this headline">¶</a></h2>
+<p>Accumulate functionality from all submodules
+<a class="reference external" href="https://github.com/justintv/Twitch-API/blob/master/v3_resources/">https://github.com/justintv/Twitch-API/blob/master/v3_resources/</a></p>
+<dl class="function">
+<dt id="twitch.api.v3.root">
+<code class="descclassname">twitch.api.v3.</code><code class="descname">root</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#twitch.api.v3.root" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the root of the api.</p>
+</dd></dl>
+
+<span class="target" id="module-twitch.api.v3.blocks"></span><div class="section" id="twitch-api-v3-blocks">
+<h3>twitch.api.v3.blocks<a class="headerlink" href="#twitch-api-v3-blocks" title="Permalink to this headline">¶</a></h3>
+<p>This module implements the functionality described here
+<a class="reference external" href="https://github.com/justintv/Twitch-API/blob/master/v3_resources/blocks.md">https://github.com/justintv/Twitch-API/blob/master/v3_resources/blocks.md</a></p>
+</div>
+<span class="target" id="module-twitch.api.v3.channels"></span><div class="section" id="twitch-api-v3-channels">
+<h3>twitch.api.v3.channels<a class="headerlink" href="#twitch-api-v3-channels" title="Permalink to this headline">¶</a></h3>
+<p>This module implements the functionality described here
+<a class="reference external" href="https://github.com/justintv/Twitch-API/blob/master/v3_resources/channels.md">https://github.com/justintv/Twitch-API/blob/master/v3_resources/channels.md</a></p>
+<dl class="function">
+<dt id="twitch.api.v3.channels.by_name">
+<code class="descclassname">twitch.api.v3.channels.</code><code class="descname">by_name</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#twitch.api.v3.channels.by_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get channel object by name.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> &#8211; Name of the channel</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Channel Object as JSON</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="twitch.api.v3.channels.teams">
+<code class="descclassname">twitch.api.v3.channels.</code><code class="descname">teams</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#twitch.api.v3.channels.teams" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns team objects associated with the channel</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> &#8211; Name of the channel</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Channel Object as JSON</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<span class="target" id="module-twitch.api.v3.chat"></span><div class="section" id="twitch-api-v3-chat">
+<h3>twitch.api.v3.chat<a class="headerlink" href="#twitch-api-v3-chat" title="Permalink to this headline">¶</a></h3>
+<p>This module implements the functionality described here
+<a class="reference external" href="https://github.com/justintv/Twitch-API/blob/master/v3_resources/chat.md">https://github.com/justintv/Twitch-API/blob/master/v3_resources/chat.md</a></p>
+<dl class="function">
+<dt id="twitch.api.v3.chat.by_channel">
+<code class="descclassname">twitch.api.v3.chat.</code><code class="descname">by_channel</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#twitch.api.v3.chat.by_channel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get links object to other chat endpoints</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> &#8211; Name of the channel</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">JSON Object describing other chat endpoints</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="twitch.api.v3.chat.badges">
+<code class="descclassname">twitch.api.v3.chat.</code><code class="descname">badges</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#twitch.api.v3.chat.badges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get chat badges for channel</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> &#8211; Name of the channel</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">JSON Object describing all channel badges</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="twitch.api.v3.chat.emoticons">
+<code class="descclassname">twitch.api.v3.chat.</code><code class="descname">emoticons</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#twitch.api.v3.chat.emoticons" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of all emoticon objects for Twitch.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">JSON Object describing all emoticon objects</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<span class="target" id="module-twitch.api.v3.follows"></span><div class="section" id="twitch-api-v3-follows">
+<h3>twitch.api.v3.follows<a class="headerlink" href="#twitch-api-v3-follows" title="Permalink to this headline">¶</a></h3>
+<p>This module implements the functionality described here
+<a class="reference external" href="https://github.com/justintv/Twitch-API/blob/master/v3_resources/follows.md">https://github.com/justintv/Twitch-API/blob/master/v3_resources/follows.md</a></p>
+<dl class="function">
+<dt id="twitch.api.v3.follows.by_channel">
+<code class="descclassname">twitch.api.v3.follows.</code><code class="descname">by_channel</code><span class="sig-paren">(</span><em>name</em>, <em>limit=25</em>, <em>offset=0</em>, <em>direction=Direction.DESC</em><span class="sig-paren">)</span><a class="headerlink" href="#twitch.api.v3.follows.by_channel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get channel&#8217;s list of following users</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> &#8211; Name of the channel</li>
+<li><strong>limit</strong> &#8211; Maximum number of objects in array.
+Default is 25. Maximum is 100.</li>
+<li><strong>offset</strong> &#8211; Object offset for pagination.
+Default is 0.</li>
+<li><strong>direction</strong> &#8211; Creation date sorting direction.
+Default is &#8216;desc&#8217;. Valid values are &#8216;asc&#8217; and &#8216;desc&#8217;.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">JSON List of Follow objects</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="twitch.api.v3.follows.by_user">
+<code class="descclassname">twitch.api.v3.follows.</code><code class="descname">by_user</code><span class="sig-paren">(</span><em>name</em>, <em>limit=25</em>, <em>offset=0</em>, <em>direction=Direction.DESC</em>, <em>sort_by=SortBy.CREATED_AT</em><span class="sig-paren">)</span><a class="headerlink" href="#twitch.api.v3.follows.by_user" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="twitch.api.v3.follows.status">
+<code class="descclassname">twitch.api.v3.follows.</code><code class="descname">status</code><span class="sig-paren">(</span><em>user</em>, <em>target</em><span class="sig-paren">)</span><a class="headerlink" href="#twitch.api.v3.follows.status" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<span class="target" id="module-twitch.api.v3.games"></span><span class="target" id="module-twitch.api.v3.ingests"></span><span class="target" id="module-twitch.api.v3.search"></span><span class="target" id="module-twitch.api.v3.streams"></span><span class="target" id="module-twitch.api.v3.subscriptions"></span><span class="target" id="module-twitch.api.v3.teams"></span><span class="target" id="module-twitch.api.v3.users"></span><span class="target" id="module-twitch.api.v3.videos"></span></div>
+<div class="section" id="module-twitch.scraper">
+<span id="scraper"></span><h2>scraper<a class="headerlink" href="#module-twitch.scraper" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="contribute.html" class="btn btn-neutral" title="Contribute" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, winlu.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.2.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
