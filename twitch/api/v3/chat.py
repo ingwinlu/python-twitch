@@ -19,7 +19,7 @@ from twitch.queries import query
 @query
 def by_channel(name):
     """Get links object to other chat endpoints
-    
+
     :param name: Name of the channel
     :returns: JSON Object describing other chat endpoints
     """

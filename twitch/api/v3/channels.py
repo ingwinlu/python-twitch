@@ -3,7 +3,7 @@
     twitch.api.v3.channels
     ~~~~~~~~~~~~~~~~~~~~~~
 
-    This module implements the functionality described here 
+    This module implements the functionality described here
     https://github.com/justintv/Twitch-API/blob/master/v3_resources/channels.md
 
     .. autofunction:: by_name(name)
