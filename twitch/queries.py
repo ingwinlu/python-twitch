@@ -7,8 +7,8 @@ from twitch.exceptions import ResourceUnavailableException
 from twitch.logging import log
 from twitch.scraper import download, get_json
 
-_api_baseurl = 'https://api.twitch.tv/kraken/'
-_hidden_api_baseurl = 'http://api.twitch.tv/api/'
+_kraken_baseurl = 'https://api.twitch.tv/kraken/'
+_hidden_baseurl = 'http://api.twitch.tv/api/'
 _usher_baseurl = 'http://usher.twitch.tv/'
 
 _v2_headers = {'ACCEPT': 'application/vnd.twitchtv.v2+json'}
@@ -81,13 +81,13 @@ class JsonQuery(_Query):
 class ApiQuery(JsonQuery):
     def __init__(self, path, headers={}):
         headers.setdefault('Client-Id', CLIENT_ID)
-        super(ApiQuery, self).__init__(_api_baseurl, headers)
+        super(ApiQuery, self).__init__(_kraken_baseurl, headers)
         self.add_path(path)
 
 
 class HiddenApiQuery(JsonQuery):
     def __init__(self, path, headers={}):
-        super(HiddenApiQuery, self).__init__(_hidden_api_baseurl, headers)
+        super(HiddenApiQuery, self).__init__(_hidden_baseurl, headers)
         self.add_path(path)
 
 
