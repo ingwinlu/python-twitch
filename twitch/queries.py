@@ -2,12 +2,13 @@
 
 from six.moves.urllib.parse import urljoin
 
+from twitch import CLIENT_ID
 from twitch.exceptions import ResourceUnavailableException
 from twitch.logging import log
 from twitch.scraper import download, get_json
 
-_api_baseurl = 'https://api.twitch.tv/kraken/'
-_hidden_api_baseurl = 'http://api.twitch.tv/api/'
+_kraken_baseurl = 'https://api.twitch.tv/kraken/'
+_hidden_baseurl = 'http://api.twitch.tv/api/'
 _usher_baseurl = 'http://usher.twitch.tv/'
 
 _v2_headers = {'ACCEPT': 'application/vnd.twitchtv.v2+json'}
@@ -67,25 +68,26 @@ class _Query(object):
 
 class DownloadQuery(_Query):
     def execute(self):
-        # TODO implement download completly here
+        # TODO implement download completely here
         return super(DownloadQuery, self).execute(download)
 
 
 class JsonQuery(_Query):
     def execute(self):
-        # TODO implement get_json completly here
+        # TODO implement get_json completely here
         return super(JsonQuery, self).execute(get_json)
 
 
 class ApiQuery(JsonQuery):
     def __init__(self, path, headers={}):
-        super(ApiQuery, self).__init__(_api_baseurl, headers)
+        headers.setdefault('Client-Id', CLIENT_ID)
+        super(ApiQuery, self).__init__(_kraken_baseurl, headers)
         self.add_path(path)
 
 
 class HiddenApiQuery(JsonQuery):
     def __init__(self, path, headers={}):
-        super(HiddenApiQuery, self).__init__(_hidden_api_baseurl, headers)
+        super(HiddenApiQuery, self).__init__(_hidden_baseurl, headers)
         self.add_path(path)
 
 
