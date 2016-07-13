@@ -2,6 +2,7 @@
 
 from six.moves.urllib.parse import urljoin
 
+from twitch import CLIENT_ID
 from twitch.exceptions import ResourceUnavailableException
 from twitch.logging import log
 from twitch.scraper import download, get_json
@@ -79,6 +80,7 @@ class JsonQuery(_Query):
 
 class ApiQuery(JsonQuery):
     def __init__(self, path, headers={}):
+        headers.setdefault('Client-Id', CLIENT_ID)
         super(ApiQuery, self).__init__(_api_baseurl, headers)
         self.add_path(path)
 
