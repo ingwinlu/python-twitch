@@ -67,13 +67,13 @@ class _Query(object):
 
 class DownloadQuery(_Query):
     def execute(self):
-        # TODO implement download completly here
+        # TODO implement download completely here
         return super(DownloadQuery, self).execute(download)
 
 
 class JsonQuery(_Query):
     def execute(self):
-        # TODO implement get_json completly here
+        # TODO implement get_json completely here
         return super(JsonQuery, self).execute(get_json)
 
 
