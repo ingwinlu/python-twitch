@@ -38,6 +38,7 @@ legacy_video_mapping = [
     ('c5928479', '/cobaltstreak/c/5928479')
 ]
 
+@unittest.skip("skipping legacy video tests as our samples are no longer available")
 def test_legacy_videos():
     for id, path in legacy_video_mapping:
         yield check_video, id, path

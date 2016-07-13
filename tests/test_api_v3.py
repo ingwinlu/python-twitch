@@ -19,6 +19,7 @@ class TestApiV3Root(unittest.TestCase):
                 u'teams': u'https://api.twitch.tv/kraken/teams',
                 u'user': u'https://api.twitch.tv/kraken/user'
             },
+            u'identified': True,
             u'token': {
                 u'authorization': None,
                 u'valid': False
@@ -156,7 +157,7 @@ class TestApiV3Videos(unittest.TestCase):
                   u'_links', u'fps', u'broadcast_id', u'broadcast_type',
                   u'preview', u'resolutions', u'_id', u'created_at',
                   u'channel']
-    test_video = 'c6055863'
+    test_video = 'v77655920'
 
     def test_by_name(self):
         result = twitch.videos.by_id(self.test_video).keys()
@@ -174,7 +175,8 @@ class TestApiV3Videos(unittest.TestCase):
 
 
 class TestApiV3Games(unittest.TestCase):
-    game_keys = [u'name', u'box', u'logo', u'_links', u'_id', u'giantbomb_id']
+    game_keys = [u'name', u'box', u'logo', u'_links', u'_id',
+                 u'giantbomb_id', u'popularity']
 
     def test_top(self):
         result = twitch.games.top().get('top')[0].get('game')
@@ -196,7 +198,7 @@ class TestApiV3Search(unittest.TestCase):
 
     def test_games(self):
         result = twitch.search.games('starcraft').get('games')[0].keys()
-        six.assertCountEqual(self, result, TestApiV3Games.game_keys + [u'popularity'])
+        six.assertCountEqual(self, result, TestApiV3Games.game_keys)
 
 
 class TestApiV3Follows(unittest.TestCase):
