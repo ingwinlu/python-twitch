@@ -14,6 +14,8 @@ Usage
 -----
 Have a look at the tests_ directory.
 
+You can supply your own Client-Id by overwriting ``twitch.CLIENT_ID``.
+
 Development
 -----------
 To help with backwards compatibility tox_ environments are provided

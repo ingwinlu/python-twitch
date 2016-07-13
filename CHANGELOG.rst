@@ -1,6 +1,10 @@
 Release history
 ###############
 
+v1.3.0
+======
+- Implemented Client-Id
+
 v1.2.0
 ======
 - Implement missing v3 modules
