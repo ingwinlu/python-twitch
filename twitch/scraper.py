@@ -38,10 +38,11 @@ def download(baseurl, parameters={}, headers={}):
     url = '?'.join([baseurl, urlencode(parameters)])
     log.debug('Downloading: ' + url)
     data = ""
+
+    req = Request(url, headers=headers)
+    req.add_header(USER_AGENT, USER_AGENT_STRING)
     for _ in range(MAX_RETRIES):
         try:
-            req = Request(url, headers=headers)
-            req.add_header(USER_AGENT, USER_AGENT_STRING)
             response = urlopen(req)
             if six.PY2:
                 data = response.read()
