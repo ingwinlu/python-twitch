@@ -5,6 +5,7 @@ from six.moves.urllib.parse import quote_plus  # NOQA
 from six.moves.urllib.parse import urlencode
 from six.moves.urllib.request import Request, urlopen
 
+from twitch import MAX_RETRIES
 from twitch.keys import USER_AGENT, USER_AGENT_STRING
 from twitch.logging import log
 
@@ -12,8 +13,6 @@ try:
     import json
 except:
     import simplejson as json  # @UnresolvedImport
-
-MAX_RETRIES = 5
 
 
 def get_json(baseurl, parameters={}, headers={}):
