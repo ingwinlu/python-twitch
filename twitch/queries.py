@@ -1,11 +1,20 @@
 # -*- encoding: utf-8 -*-
+import six
 
-from six.moves.urllib.parse import urljoin
+from six.moves.urllib.error import URLError
+from six.moves.urllib.parse import urljoin, urlencode
+from six.moves.urllib.parse import quote_plus  # NOQA
+from six.moves.urllib.request import Request, urlopen
 
-from twitch import CLIENT_ID
+from twitch import CLIENT_ID, MAX_RETRIES
 from twitch.exceptions import ResourceUnavailableException
+from twitch.keys import USER_AGENT, USER_AGENT_STRING
 from twitch.logging import log
-from twitch.scraper import download, get_json
+
+try:
+    import json
+except:
+    import simplejson as json  # @UnresolvedImport
 
 _kraken_baseurl = 'https://api.twitch.tv/kraken/'
 _hidden_baseurl = 'http://api.twitch.tv/api/'
@@ -15,11 +24,11 @@ _v2_headers = {'ACCEPT': 'application/vnd.twitchtv.v2+json'}
 _v3_headers = {'ACCEPT': 'application/vnd.twitchtv.v3+json'}
 
 
-class _Query(object):
-    def __init__(self, url, headers={}):
-        self._headers = headers
+class Query(object):
+    def __init__(self, url):
         self._url = url
 
+        self._headers = {USER_AGENT: USER_AGENT_STRING}
         self._params = dict()
         self._urlkws = dict()
 
@@ -32,9 +41,12 @@ class _Query(object):
     def headers(self):
         return self._headers
 
+    def update_headers(self, additional_headers):
+        self._headers.update(additional_headers)
+
     @property
     def params(self):
-        return self._params
+        return urlencode(self._params)
 
     @property
     def urlkws(self):
@@ -59,52 +71,69 @@ class _Query(object):
         return 'Query to {url}, params {params}, headers {headers}'.format(
                 url=self.url, params=self.params, headers=self.headers)
 
-    def execute(self, f):
-        try:
-            return f(self.url, self.params, self.headers)
-        except:
-            raise ResourceUnavailableException(str(self))
-
-
-class DownloadQuery(_Query):
     def execute(self):
-        # TODO implement download completely here
-        return super(DownloadQuery, self).execute(download)
+        '''Executes the query by building the full url and making a Request'''
+        full_url = '?'.join([self.url, self.params])
+        log.debug('Querying ' + full_url)
+        request = Request(full_url, headers=self.headers)
+        answer = ""
+
+        for _ in range(MAX_RETRIES):
+            try:
+                response = urlopen(request)
+                if six.PY2:
+                    answer = response.read()
+                else:
+                    answer = response.read().decode('utf-8')
+                response.close()
+                break
+            except Exception as err:
+                if not isinstance(err, URLError):
+                    log.debug("Error %s during HTTP Request, abort", repr(err))
+                    raise  # propagate non-URLError
+            log.debug("Error %s during HTTP Request, retrying", repr(err))
+        else:
+            raise
+        return answer
 
 
-class JsonQuery(_Query):
+class JsonQuery(Query):
     def execute(self):
-        # TODO implement get_json completely here
-        return super(JsonQuery, self).execute(get_json)
+        raw_json = super(JsonQuery, self).execute()
+        jsonDict = json.loads(raw_json)
+        log.debug(json.dumps(jsonDict, indent=4))
+        return jsonDict
 
 
 class ApiQuery(JsonQuery):
-    def __init__(self, path, headers={}):
-        headers.setdefault('Client-Id', CLIENT_ID)
-        super(ApiQuery, self).__init__(_kraken_baseurl, headers)
+    def __init__(self, path):
+        super(ApiQuery, self).__init__(_kraken_baseurl)
         self.add_path(path)
+        self.update_headers({'Client-Id': CLIENT_ID})
 
 
 class HiddenApiQuery(JsonQuery):
-    def __init__(self, path, headers={}):
-        super(HiddenApiQuery, self).__init__(_hidden_baseurl, headers)
+    def __init__(self, path):
+        super(HiddenApiQuery, self).__init__(_hidden_baseurl)
         self.add_path(path)
 
 
-class UsherQuery(DownloadQuery):
-    def __init__(self, path, headers={}):
-        super(UsherQuery, self).__init__(_usher_baseurl, headers)
+class UsherQuery(Query):
+    def __init__(self, path):
+        super(UsherQuery, self).__init__(_usher_baseurl)
         self.add_path(path)
 
 
 class V3Query(ApiQuery):
     def __init__(self, path):
-        super(V3Query, self).__init__(path, _v3_headers)
+        super(V3Query, self).__init__(path)
+        self.update_headers(_v3_headers)
 
 
 class V2Query(ApiQuery):
     def __init__(self, path):
-        super(V2Query, self).__init__(path, _v2_headers)
+        super(V2Query, self).__init__(path)
+        self.update_headers(_v2_headers)
 
 
 def assert_new(d, k):
@@ -114,11 +143,10 @@ def assert_new(d, k):
                          k, v))
 
 
-# TODO maybe rename
 def query(f):
     def wrapper(*args, **kwargs):
         qry = f(*args, **kwargs)
-        if not isinstance(qry, _Query):
+        if not isinstance(qry, Query):
             raise ValueError('{} did not return a Query, was: {}'.format(
                              f.__name__, repr(qry)))
         log.debug('QUERY: url: %s, params: %s, '
