@@ -74,13 +74,6 @@ class Query(object):
                 url=self.url, params=self.params, headers=self.headers)
 
     def execute(self):
-        '''Executes the Query, wraps resolve in try catch'''
-        try:
-            return self._resolve()
-        except URLError:
-            raise ResourceUnavailableException(str(self))
-
-    def _resolve(self):
         '''Resolves the Query and tries to return data'''
         log.debug('Querying ' + self.url)
         request = Request(self.url, headers=self.headers)
@@ -101,13 +94,13 @@ class Query(object):
                     raise  # propagate non-URLError
                 log.debug("Error %s during HTTP Request, retrying", repr(err))
         else:
-            raise
+            raise ResourceUnavailableException(str(self))
         return answer
 
 
 class JsonQuery(Query):
-    def _resolve(self):
-        raw_json = super(JsonQuery, self)._resolve()
+    def execute(self):
+        raw_json = super(JsonQuery, self).execute()
         jsonDict = json.loads(raw_json)
         log.debug(json.dumps(jsonDict, indent=4))
         return jsonDict
