@@ -99,7 +99,7 @@ class Query(object):
                 if not isinstance(err, URLError):
                     log.debug("Error %s during HTTP Request, abort", repr(err))
                     raise  # propagate non-URLError
-            log.debug("Error %s during HTTP Request, retrying", repr(err))
+                log.debug("Error %s during HTTP Request, retrying", repr(err))
         else:
             raise
         return answer
