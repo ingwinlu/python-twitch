@@ -28,4 +28,4 @@ class TestQueries(unittest.TestCase):
         q.add_urlkw('channel','winlu')
         self.assertEqual(
                 q.url,
-                'https://api.twitch.tv/kraken/stream/winlu')
+                'https://api.twitch.tv/kraken/stream/winlu?')

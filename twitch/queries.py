@@ -35,7 +35,9 @@ class Query(object):
     @property
     def url(self):
         formatted_url = self._url.format(**self._urlkws)  # throws KeyError
-        return formatted_url
+        encoded_params = urlencode(self.params)
+        full_url = '?'.join([formatted_url, encoded_params])
+        return full_url
 
     @property
     def headers(self):
@@ -46,7 +48,7 @@ class Query(object):
 
     @property
     def params(self):
-        return urlencode(self._params)
+        return self._params
 
     @property
     def urlkws(self):
@@ -72,10 +74,17 @@ class Query(object):
                 url=self.url, params=self.params, headers=self.headers)
 
     def execute(self):
-        '''Executes the query by building the full url and making a Request'''
-        full_url = '?'.join([self.url, self.params])
-        log.debug('Querying ' + full_url)
-        request = Request(full_url, headers=self.headers)
+        '''Executes the Query, wraps resolve in try catch'''
+        try:
+            return self._resolve()
+        except URLError:
+            raise ResourceUnavailableException(str(self))
+
+
+    def _resolve(self):
+        '''Resolves the Query and tries to return data'''
+        log.debug('Querying ' + self.url)
+        request = Request(self.url, headers=self.headers)
         answer = ""
 
         for _ in range(MAX_RETRIES):
@@ -98,8 +107,8 @@ class Query(object):
 
 
 class JsonQuery(Query):
-    def execute(self):
-        raw_json = super(JsonQuery, self).execute()
+    def _resolve(self):
+        raw_json = super(JsonQuery, self)._resolve()
         jsonDict = json.loads(raw_json)
         log.debug(json.dumps(jsonDict, indent=4))
         return jsonDict
