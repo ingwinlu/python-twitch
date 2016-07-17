@@ -2,7 +2,7 @@
 import six
 
 from six.moves.urllib.error import URLError
-from six.moves.urllib.parse import urljoin, urlencode
+from six.moves.urllib.parse import urlencode, urljoin
 from six.moves.urllib.parse import quote_plus  # NOQA
 from six.moves.urllib.request import Request, urlopen
 
@@ -79,7 +79,6 @@ class Query(object):
             return self._resolve()
         except URLError:
             raise ResourceUnavailableException(str(self))
-
 
     def _resolve(self):
         '''Resolves the Query and tries to return data'''
